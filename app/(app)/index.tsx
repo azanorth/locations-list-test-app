@@ -1,16 +1,6 @@
-import { useSession } from '@/ctx';
-import { ThemedView } from '@/components/ThemedView';
-import { ThemedText } from '@/components/ThemedText';
+import { Redirect } from 'expo-router';
 
-const HomeScreen = () => {
-  const { signOut } = useSession();
-  return (
-    <ThemedView
-      style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
-    >
-      <ThemedText onPress={signOut}>Sign Out</ThemedText>
-    </ThemedView>
-  );
-};
-
-export default HomeScreen;
+export default function AppScreen() {
+  // If a session is active just redirect to the location list screen
+  return <Redirect href="/location-list" />;
+}
