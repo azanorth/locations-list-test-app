@@ -1,3 +1,4 @@
+import { Colors } from '@/constants/Colors';
 import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
@@ -27,9 +28,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   button: {
-    backgroundColor: '#4682B4',
+    backgroundColor: Colors.light.primary,
     height: 40,
+    width: '100%',
     justifyContent: 'center',
+    alignItems: 'center',
     padding: 5,
     borderRadius: 8,
   },
