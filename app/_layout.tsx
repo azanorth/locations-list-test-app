@@ -1,11 +1,21 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
+import {
+  DarkTheme,
+  DefaultTheme,
+  ThemeProvider,
+} from '@react-navigation/native';
+import { Provider as ReduxProvider } from 'react-redux';
 import { useFonts } from 'expo-font';
-import { Stack } from 'expo-router';
+import { Slot } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
+import { PersistGate } from 'redux-persist/integration/react';
 import { useEffect } from 'react';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import 'react-native-reanimated';
 
 import { useColorScheme } from '@/hooks/useColorScheme';
+import { persistor, store } from '@/store/store';
+import SessionProvider from '@/ctx';
+import commonStyles from '@/styles/common';
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -28,10 +38,15 @@ export default function RootLayout() {
 
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="+not-found" />
-      </Stack>
+      <ReduxProvider store={store}>
+        <PersistGate persistor={persistor}>
+          <GestureHandlerRootView style={commonStyles.flexOne}>
+            <SessionProvider>
+              <Slot />
+            </SessionProvider>
+          </GestureHandlerRootView>
+        </PersistGate>
+      </ReduxProvider>
     </ThemeProvider>
   );
 }
