@@ -7,27 +7,11 @@ import GreetingHeader from '@/components/GreetingHeader';
 import commonStyles from '@/styles/common';
 import ListTile from '@/components/ListTile';
 import { Colors } from '@/constants/Colors';
+import { useAppSelector } from '@/hooks/useStore';
+import { selectLocations } from '@/store/locations/slice';
 
 const LocationListScreen = () => {
-  const data = [
-    { id: '1', title: 'Element' },
-    { id: '2', title: 'Element' },
-    { id: '3', title: 'Element' },
-    { id: '4', title: 'Element' },
-    { id: '5', title: 'Element' },
-    { id: '6', title: 'Element' },
-    { id: '7', title: 'Element' },
-    { id: '8', title: 'Element' },
-    { id: '9', title: 'Element' },
-    { id: '10', title: 'Element' },
-    { id: '11', title: 'Element' },
-    { id: '12', title: 'Element' },
-    { id: '13', title: 'Element' },
-    { id: '14', title: 'Element' },
-    { id: '15', title: 'Element' },
-    { id: '16', title: 'Element' },
-    { id: '17', title: 'Element' },
-  ];
+  const locations = useAppSelector(selectLocations);
 
   return (
     <SafeAreaView style={commonStyles.flexOne} edges={['bottom']}>
@@ -42,9 +26,9 @@ const LocationListScreen = () => {
           </Pressable>
         </View>
         <FlatList
-          data={data}
+          data={locations}
           style={styles.list}
-          renderItem={({ index }) => <ListTile id={index} />}
+          renderItem={({ item }) => <ListTile location={item} />}
           keyExtractor={(item) => item.id}
         />
       </ThemedView>
