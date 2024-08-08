@@ -52,5 +52,13 @@ export const selectFilteredLocations = createSelector(
   },
 );
 
+export const selectLocationById = createSelector(
+  (state: RootState) => state.locations.data,
+  (_: RootState, id: string) => id,
+  (locations: LocationEntity[], id: string) => {
+    return locations.find((location) => location.id === id);
+  },
+);
+
 // Reducer
 export default locationsSlice.reducer;
