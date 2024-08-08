@@ -22,21 +22,21 @@ export const locationsSlice = createSlice({
     addLocation(state, action: PayloadAction<Location>) {
       state.data = [...state.data, { ...action.payload, id: genRandomStr() }];
     },
-    removeLocation(state, action: PayloadAction<number>) {
-      //TODO:
+    removeLocation(state, action: PayloadAction<string>) {
+      state.data = state.data.filter((item) => item.id !== action.payload);
     },
   },
 });
 
 // Actions
-export const moviesActions = {
-  fetchIsLoading: locationsSlice.actions.addLocation,
-  fetchSucceeded: locationsSlice.actions.removeLocation,
+export const locationsActions = {
+  addLocation: locationsSlice.actions.addLocation,
+  removeLocation: locationsSlice.actions.removeLocation,
 };
 
 // Selectors
 // TODO: Implement filtering
-export const selectMovies = (state: RootState): Array<LocationEntity> =>
+export const selectLocations = (state: RootState): Array<LocationEntity> =>
   state.locations.data;
 
 // Reducer
