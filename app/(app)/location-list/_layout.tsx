@@ -1,9 +1,8 @@
-import { Pressable } from 'react-native';
+import { Pressable, useColorScheme } from 'react-native';
 import { Stack } from 'expo-router';
 import { Feather } from '@expo/vector-icons';
 
 import { useSession } from '@/ctx';
-import { useColorScheme } from '@/hooks/useColorScheme';
 import { ThemedText } from '@/components/ThemedText';
 import { Colors } from '@/constants/Colors';
 

@@ -44,6 +44,7 @@ const LocationListScreen = () => {
         <View style={styles.inputContainer}>
           <TextInput
             placeholder="Filter by name"
+            placeholderTextColor={Colors[colorScheme ?? 'light'].text}
             style={[
               styles.input,
               { color: Colors[colorScheme ?? 'light'].text },

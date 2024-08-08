@@ -3,6 +3,7 @@ import {
   DefaultTheme,
   ThemeProvider,
 } from '@react-navigation/native';
+import { useColorScheme } from 'react-native';
 import { Provider as ReduxProvider } from 'react-redux';
 import { useFonts } from 'expo-font';
 import { Slot } from 'expo-router';
@@ -12,7 +13,6 @@ import { useEffect } from 'react';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import 'react-native-reanimated';
 
-import { useColorScheme } from '@/hooks/useColorScheme';
 import { persistor, store } from '@/store/store';
 import SessionProvider from '@/ctx';
 import commonStyles from '@/styles/common';

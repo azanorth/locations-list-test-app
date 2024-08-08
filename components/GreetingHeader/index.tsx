@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View } from 'react-native';
 
 import { ThemedText } from '@/components/ThemedText';
+import styles from './styles';
 
 const GreetingHeader = () => {
   const [greeting, setGreeting] = useState('');
@@ -31,11 +32,5 @@ const GreetingHeader = () => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    paddingVertical: 20,
-  },
-});
 
 export default GreetingHeader;
