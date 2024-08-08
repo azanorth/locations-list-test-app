@@ -1,5 +1,9 @@
 // DUCKS pattern
-import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
+import {
+  createSelector,
+  createSlice,
+  type PayloadAction,
+} from '@reduxjs/toolkit';
 
 import { RootState } from '../store';
 import LocationEntity from '@/entities/locationsEntity';
@@ -35,9 +39,18 @@ export const locationsActions = {
 };
 
 // Selectors
-// TODO: Implement filtering
-export const selectLocations = (state: RootState): Array<LocationEntity> =>
-  state.locations.data;
+export const selectFilteredLocations = createSelector(
+  (state: RootState) => state.locations.data,
+  (_: RootState, startingLetters: string) => startingLetters,
+  (locations: LocationEntity[], startingLetters: string) => {
+    if (!startingLetters.trim()) {
+      return locations;
+    }
+    return locations.filter((item) =>
+      item.name.toLowerCase().startsWith(startingLetters.toLowerCase()),
+    );
+  },
+);
 
 // Reducer
 export default locationsSlice.reducer;

@@ -1,17 +1,33 @@
-import { FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
+import { useState } from 'react';
+import {
+  FlatList,
+  KeyboardAvoidingView,
+  Platform,
+  Pressable,
+  Text,
+  TextInput,
+  useColorScheme,
+  View,
+} from 'react-native';
 import { router } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { AntDesign } from '@expo/vector-icons';
 
 import { ThemedView } from '@/components/ThemedView';
 import GreetingHeader from '@/components/GreetingHeader';
-import commonStyles from '@/styles/common';
 import ListTile from '@/components/ListTile';
 import { Colors } from '@/constants/Colors';
 import { useAppSelector } from '@/hooks/useStore';
-import { selectLocations } from '@/store/locations/slice';
+import { selectFilteredLocations } from '@/store/locations/slice';
+import commonStyles from '@/styles/common';
+import styles from './styles';
 
 const LocationListScreen = () => {
-  const locations = useAppSelector(selectLocations);
+  const [filterByName, setFilterByName] = useState('');
+  const colorScheme = useColorScheme();
+  const locations = useAppSelector((state) =>
+    selectFilteredLocations(state, filterByName),
+  );
 
   return (
     <SafeAreaView style={commonStyles.flexOne} edges={['bottom']}>
@@ -25,42 +41,42 @@ const LocationListScreen = () => {
             <Text style={{ color: Colors.dark.text }}>Add new location</Text>
           </Pressable>
         </View>
-        <FlatList
-          data={locations}
-          style={styles.list}
-          renderItem={({ item }) => <ListTile location={item} />}
-          keyExtractor={(item) => item.id}
-        />
+        <View style={styles.inputContainer}>
+          <TextInput
+            placeholder="Filter by name"
+            style={[
+              styles.input,
+              { color: Colors[colorScheme ?? 'light'].text },
+            ]}
+            onChangeText={setFilterByName}
+            value={filterByName}
+          />
+          {filterByName.trim() ? (
+            <Pressable onPress={() => setFilterByName('')}>
+              <AntDesign
+                name="closecircleo"
+                size={24}
+                color={Colors[colorScheme ?? 'light'].text}
+              />
+            </Pressable>
+          ) : null}
+        </View>
+        <KeyboardAvoidingView
+          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+          keyboardVerticalOffset={100}
+          style={styles.keyboardAvoidingContainer}
+        >
+          <FlatList
+            data={locations}
+            style={styles.list}
+            contentContainerStyle={styles.listContentContainer}
+            renderItem={({ item }) => <ListTile location={item} />}
+            keyExtractor={(item) => item.id}
+          />
+        </KeyboardAvoidingView>
       </ThemedView>
     </SafeAreaView>
   );
 };
 
 export default LocationListScreen;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'flex-start',
-    alignItems: 'flex-start',
-  },
-  headerContainer: {
-    flexDirection: 'row',
-    width: '100%',
-    alignItems: 'center',
-    paddingHorizontal: 15,
-    justifyContent: 'space-between',
-  },
-  addButton: {
-    backgroundColor: Colors.light.primary,
-    height: 40,
-    justifyContent: 'center',
-    padding: 5,
-    borderRadius: 8,
-  },
-  list: {
-    width: '100%',
-    flex: 1,
-    padding: 15,
-  },
-});
