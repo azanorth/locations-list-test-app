@@ -1,5 +1,4 @@
 import { useCallback } from 'react';
-import { StyleSheet } from 'react-native';
 
 import { ThemedView } from '@/components/ThemedView';
 import CreateLocationForm from '@/features/CreateLocationForm';
@@ -29,5 +28,3 @@ const CreateLocationScreen = () => {
 };
 
 export default CreateLocationScreen;
-
-const styles = StyleSheet.create({});
