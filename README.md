@@ -1,4 +1,4 @@
-# Welcome to your Expo app 👋
+# Welcome to Location list test app 👋
 
 This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
 
@@ -22,6 +22,8 @@ In the output, you'll find options to open the app in a
 - [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
 - [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
 - [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+
+☝️ This is where it is described exactly how you can run the project, for a quick start, I would recommend running it on a "hardware" device using the Expo Go application
 
 You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
 
