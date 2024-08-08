@@ -1,3 +1,4 @@
-import shortUUID from 'short-uuid';
+import { customAlphabet } from 'nanoid/non-secure';
 
-export const genRandomStr = () => shortUUID.generate();
+const nanoid = customAlphabet('abcdefghijklmnopqrstuvwxyz0123456789', 10);
+export const genRandomStr = () => nanoid();
