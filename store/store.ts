@@ -1,6 +1,7 @@
 import { EnhancedStore, configureStore } from '@reduxjs/toolkit';
 import { persistStore } from 'redux-persist';
-import rootReducer from './rootReucer';
+
+import rootReducer from './rootReducer';
 
 const makeStore = (): EnhancedStore => {
   const store = configureStore({

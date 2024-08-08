@@ -1,8 +1,7 @@
-import { Pressable } from 'react-native';
+import { Pressable, useColorScheme } from 'react-native';
 import { router, Stack } from 'expo-router';
 import { AntDesign } from '@expo/vector-icons';
 
-import { useColorScheme } from '@/hooks/useColorScheme';
 import { ThemedText } from '@/components/ThemedText';
 import { Colors } from '@/constants/Colors';
 
@@ -15,8 +14,6 @@ const CreateLocationLayout = () => {
         headerTitleAlign: 'center',
         headerTintColor: 'transparent',
         headerShadowVisible: false,
-        presentation: 'modal',
-        animation: 'slide_from_bottom',
         headerLeft: () => (
           <ThemedText type="subtitle">Create the new location</ThemedText>
         ),

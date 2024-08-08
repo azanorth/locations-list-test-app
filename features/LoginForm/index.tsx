@@ -4,6 +4,7 @@ import {
   Platform,
   Pressable,
   TextInput,
+  useColorScheme,
   View,
 } from 'react-native';
 import { Login } from '@/interfaces/login';
@@ -12,7 +13,6 @@ import * as Yup from 'yup';
 
 import { ThemedText } from '@/components/ThemedText';
 import { Colors } from '@/constants/Colors';
-import { useColorScheme } from '@/hooks/useColorScheme';
 import styles from './styles';
 
 const validationSchema = Yup.object().shape({
