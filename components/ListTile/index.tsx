@@ -9,6 +9,7 @@ import LocationEntity from '@/entities/locationsEntity';
 import { useAppDispatch } from '@/hooks/useStore';
 import { locationsActions } from '@/store/locations/slice';
 import styles from './styles';
+import { router } from 'expo-router';
 
 interface Props {
   location: LocationEntity;
@@ -42,7 +43,17 @@ const ListTile: FC<Props> = ({ location: { name, id } }) => {
         <ThemedText numberOfLines={1}>{name}</ThemedText>
       </View>
       <View style={styles.tileActions}>
-        <AntDesign name="infocirlceo" size={24} color={Colors.light.primary} />
+        <Pressable
+          onPress={() =>
+            router.push({ pathname: '/location-details', params: { id } })
+          }
+        >
+          <AntDesign
+            name="infocirlceo"
+            size={24}
+            color={Colors.light.primary}
+          />
+        </Pressable>
         <Pressable onPress={handleOpenModal}>
           <AntDesign name="delete" size={24} color="red" />
         </Pressable>
